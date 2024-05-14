@@ -1,11 +1,10 @@
-import './App.css'
 import InputBox from './components'
 
 function App() {
 
   return (
     <>
-      <section className="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
+      <section className="flex items-center justify-center gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
         <div className="container h-full p-10">
           <div
             className="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
