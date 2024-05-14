@@ -1,6 +1,7 @@
 import InputBox from './components'
 
 function App() {
+  const currencyOptions = ['usd', 'pkr', 'eur', 'gbp', 'cad', 'aud'];
 
   return (
     <>
@@ -27,7 +28,7 @@ function App() {
                       </div>
 
                       <form>
-                        <InputBox labelTxt='From'/>
+                        <InputBox labelTxt='From' options={currencyOptions}/>
                         <div className="flex items-center flex justify-center pb-6">
                           <button
                             type="button"
@@ -37,7 +38,7 @@ function App() {
                             Swap currency
                           </button>
                         </div>
-                        <InputBox labelTxt='To'/>
+                        <InputBox labelTxt='To' options={currencyOptions}/>
                       </form>
                     </div>
                   </div>
@@ -49,7 +50,7 @@ function App() {
                     }}>
                     <div className="px-4 py-6 text-white md:mx-6 md:p-12">
                       <h4 className="mb-6 text-xl font-semibold">
-                        We convert based on live currency conversion rates!
+                        We convert based on currency conversion rates!
                       </h4>
                       <p className="text-sm">
                         Lorem ipsum dolor sit amet, consectetur adipisicing

@@ -1,6 +1,24 @@
 import '../InputBox.css'
+import { useState } from 'react';
 
-function InputBox({labelTxt = ' '}){
+function InputBox({labelTxt = ' ', options = []}){
+  const [defaultTxt, setDefaultTxt] = useState('Currency');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const selectOption = (event, selectedOption) => {
+    event.preventDefault();
+    setDefaultTxt(selectedOption.toUpperCase());
+    setIsDropdownOpen(false);
+  }
+
+  const dropdownList = options.map((item, index) => (
+    <li key={index}>
+      <a href="" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={(event) => selectOption(event, item)}>
+        {item}
+      </a>
+    </li>
+  ));
+
     return (
       <div className="relative mb-4 flex items-center">
         <input
@@ -15,35 +33,27 @@ function InputBox({labelTxt = ' '}){
         >
           {labelTxt}
         </label>
-        <button
+        { <button
           id="dropdownHoverButton"
           data-dropdown-toggle="dropdownHover"
           data-dropdown-trigger="hover"
           className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 ml-2"
           type="button"
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          Currency
+          {defaultTxt}
           <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
           </svg>
-        </button>
+        </button>}
 
-        <div id="dropdownHover" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-full mt-1">
-          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-            </li>
-          </ul>
-        </div>
+        {isDropdownOpen && (
+          <div id="dropdownHover" className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-full mt-1 right-0" onClick={() => setIsDropdownOpen(false)}>
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+              {dropdownList}
+            </ul>
+          </div>
+        )}
       </div>
     )
 }
