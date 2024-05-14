@@ -1,4 +1,4 @@
-{
+const conversionRates = {
     "usd": {
         "pkr": 0.0003,
         "eur": 0.83,
@@ -43,3 +43,4 @@
     }
   }
   
+  export default conversionRates;
