@@ -1,0 +1,4 @@
+#dropdownHoverButton:hover + #dropdownHover,
+#dropdownHover:hover {
+  display: block;
+}
